@@ -6,42 +6,38 @@ export class Haiku {
     this.line1Array = null;
     this.line2Array = null;
     this.line3Array = null;
-    this.numOfSyllable = 0;
+    this.array = [];
   }
 
   stringBreaker() {
-    // var haikuArr = [this.line1Arr, this.line2Arr, this.line3Arr];
-    // haikuArr.forEach((myLine) => {
-    // this.syllableChecker()
-    // })
     this.line1Array = (this.line1.split(" "));
     this.line2Array = (this.line2.split(" "));
     this.line3Array = (this.line3.split(" "));
-    //[[line1split],[line2split],[line3split]]
-
-    // for (let i = 0; i < haikuArr.length; i++){
-    //   newArray.push(haikuArr[i].split(" "));
-    //  }
     return true;
   }
 
   syllableChecker(passedWord) {
     let word = passedWord.toLowerCase();
-    let array = [];
-    if (word.length <= 3) {
-      console.log(1); 
-    } else {
-      word = word.replace(/([^laeiouy]es|ed)$/i, '');
-      word = word.replace(/([.!?:;])$/i, '');
-      word = word.replace(/^y/i, '');
-      console.log(word.match(/[aeiouy]{1,2}/gi).length);
+      if (word.length <= 3) {
+        this.array.push(1);
+        console.log(this.array);
+      } else {
+        word = word.replace(/([^laeiouy]es|ed)$/i, '');
+        word = word.replace(/([.!?:;])$/i, '');
+        word = word.replace(/^y/i, '');
+        this.array.push(word.match(/[aeiouy]{1,2}/gi).length);
+        console.log(typeof(this.array[0]));
+      }
+      console.log(this.numOfSyllable(this.array));
       
-      // const reducer = function (accumulator, currentValue) {
-      //   accumulator + currentValue;
-      // };
-      // this.numOfSyllable = array.reduce(reducer); 
-     
-    }
+  }
+
+  numOfSyllable(){
+    let sumOfSyllable = 0
+    this.array.forEach(function(){
+      sumOfSyllable = this.array++;
+    })
+    return sumOfSyllable;
   }
 
   solver() {
@@ -52,39 +48,13 @@ export class Haiku {
     this.line1Array.forEach(myword => {
       this.syllableChecker(myword);
     });
-    this.line2Array.forEach(myword => {
-      this.syllableChecker(myword);
+    // this.line2Array.forEach(myword => {
+    //   this.syllableChecker(myword);
 
-    });
-    this.line3Array.forEach(myword => {
-      this.syllableChecker(myword);
+    // });
+    // this.line3Array.forEach(myword => {
+    //   this.syllableChecker(myword);
       
-    });
-
-
-    // this.haikuArray.map((myLine) => {
-    //   console.log("outer test")
-    //   this.lineCount = [];
-    //   myLine.map((myWord) => {
-    //   console.log("inner test")
-    //   this.syllableChecker(myWord); 
-    //   });
-    //   this.totalCount.push(this.lineCount);
-
-  }
-
-  //  working on for loops and holder arrays for syllableChecker
-
-  // // stringBreaker[[" "], [" "], [" "]]
-  // // for (syllableChecker[['1','3','2']...]) {
-  // solver() {
-  // push [[count1],[count2],[count3]];
-  //   lineSyllableHolder []
-  //   *repeats through for loop*
-
-
+    // });
+  } 
 }
-
-
-
-// testArr = [5, 7, 5];
