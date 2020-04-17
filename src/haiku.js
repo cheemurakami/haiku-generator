@@ -6,7 +6,8 @@ export class Haiku {
     this.line1Array = null;
     this.line2Array = null;
     this.line3Array = null;
-    this.array = [];
+    this.wordArray = [];
+    this.numOfSyllable = 0;
   }
 
   stringBreaker() {
@@ -18,27 +19,23 @@ export class Haiku {
 
   syllableChecker(passedWord) {
     let word = passedWord.toLowerCase();
-      if (word.length <= 3) {
-        this.array.push(1);
-        console.log(this.array);
-      } else {
-        word = word.replace(/([^laeiouy]es|ed)$/i, '');
-        word = word.replace(/([.!?:;])$/i, '');
-        word = word.replace(/^y/i, '');
-        this.array.push(word.match(/[aeiouy]{1,2}/gi).length);
-        console.log(typeof(this.array[0]));
-      }
-      console.log(this.numOfSyllable(this.array));
-      
+    if (word.length <= 3) {
+      return 1;
+    } else {
+      word = word.replace(/([^laeiouy]es|ed)$/i, '');
+      word = word.replace(/([.!?:;])$/i, '');
+      word = word.replace(/^y/i, '');
+      return word.match(/[aeiouy]{1,2}/gi).length;
+    }
   }
 
-  numOfSyllable(){
-    let sumOfSyllable = 0
-    this.array.forEach(function(){
-      sumOfSyllable = this.array++;
-    })
-    return sumOfSyllable;
-  }
+  // numOfSyllable(){
+  //   let sumOfSyllable = 0
+  //   this.array.forEach(function(){
+  //     sumOfSyllable = this.array++;
+  //   })
+  //   return sumOfSyllable;
+  // }
 
   solver() {
     this.stringBreaker();
@@ -46,15 +43,17 @@ export class Haiku {
     console.log("Solver called line2Array: ", this.line2Array);
     console.log("Solver called line3Array: ", this.line3Array);
     this.line1Array.forEach(myword => {
-      this.syllableChecker(myword);
+      let syllableCount = this.syllableChecker(myword);
+      this.numOfSyllable += syllableCount
     });
+    console.log(this.numOfSyllable)
     // this.line2Array.forEach(myword => {
     //   this.syllableChecker(myword);
 
     // });
     // this.line3Array.forEach(myword => {
     //   this.syllableChecker(myword);
-      
+
     // });
-  } 
+  }
 }
